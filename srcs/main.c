@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 18:28:59 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/20 15:33:19 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/21 12:20:33 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
-
+		return (0);
 		while (line)
 		{
 			line = get_next_line(fd);
