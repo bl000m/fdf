@@ -6,14 +6,14 @@
 #    By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/03 14:44:01 by mpagani           #+#    #+#              #
-#    Updated: 2022/12/21 14:48:08 by mpagani          ###   ########lyon.fr    #
+#    Updated: 2022/12/22 11:25:13 by mpagani          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= fdf
 # src / obj files
 SRCS 		= main.c
-OBJS 		= $(SRCS:%.c=$(BUILD_DIR)/%.o)
+OBJS 		= $(SRCS:%.c=$(OBJDIR)/%.o)
 
 # compile
 CC 			= cc
@@ -32,41 +32,37 @@ LIBFT_LNK	= -L ./libft -l ft
 
 # library minilibx
 LIBX_DIR	= ./minilibx_macos
-MLX_LIB		= $(MLX)/mlx.a
-MLX_INC		= -I ./miniLibX
-MLX_LNK		= -L ./miniLibX -l mlx -framework OpenGL -framework AppKit
+LIBX		= $(MLX)/mlx.a
+LIBX_INC	= -I ./minilibx_macos
+LIBX_LNK		= -L ./minilibx_macos -l mlx -framework OpenGL -framework AppKit
 
-AR 			= ar
-RM 			= rm -f
-HEADER_FILE = push_swap.h
+# others
+RM 			= rm -rf
 
-all: obj $(LIBFT) $(MLX_LIB) $(NAME)
+all: obj $(LIBFT) $(LIBX) $(NAME)
 
-obj: mkdir -p $(OBJDIR)
+obj:
+	mkdir -p $(OBJDIR)
 
-# $(NAME): $(OBJS) $(LIBFT)
-# 	$(CC) $(CFLAGS) $^ -o $@
-# 	@echo "Done!"
-
-$(OBJDIR)/%.o: $(SRCS_DIR)/%.c $(INCS_DIR)/$(HEADER_FILE) Makefile
-	$(CC) $(CFLAGS) -c $< -o $@ -I$(INCS_DIR) $(LIBFT_INC) $(MLX_INC)
+$(OBJDIR)/%.o: $(SRCS_DIR)/%.c Makefile $(INCS_DIR)/fdf.h
+	$(CC) $(CFLAGS) $(LIBX_INC) $(LIBFT_INC) -I $(INCS_DIR) -o $@ -c $<
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
-	# cp $(LIBFT) $(NAME)
-$(MLX_LIB):
+
+$(LIBX):
 	make -C $(LIBX_DIR)
-	# cp $(LIBFT) $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) $(MLX_LNK) $(LIBFT_LNK) -lm -o $(NAME)
+	$(CC) $(OBJS) $(LIBX_LNK) $(LIBFT_LNK) -lm -o $(NAME)
 
 clean:
-	make clean -C $(LIBFT_DIR)
-	$(RM) -r $(BUILD_DIR)
+	$(RM) $(OBJDIR)
+	make -C $(LIBFT_DIR) clean
+	make -C $(LIBX_DIR) clean
 
 fclean: clean
-	make fclean -C $(LIBFT_DIR)
+	make -C $(LIBFT_DIR) fclean
 	$(RM) $(NAME)
 
 re: fclean $(NAME)
