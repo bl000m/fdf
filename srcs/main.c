@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 18:28:59 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/22 16:54:33 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 18:35:54 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,27 @@
 
 */
 
+void	display_z(t_fdf *array[], int x_max, int y_max)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (i < y_max)
+	{
+		while (j < x_max)
+		{
+			ft_printf("%i(x)", array[i][j].x);
+			ft_printf("%i(y)", array[i][j].y);
+			ft_printf("%i(z), ", array[i][j].z);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_fdf	**converted_map;
@@ -51,27 +72,4 @@ int	main(int argc, char **argv)
 		file_map = argv[1];
 		converted_map = read_map(file_map);
 	}
-}
-
-int	open_file_map(char *file_map)
-{
-	int		fd;
-
-	fd = open(file_map, O_RDONLY);
-	check_error(fd);
-	return (fd);
-}
-
-int	get_values(char *file_map, char c)
-{
-	int	fd;
-
-	fd = open_file_map(file_map);
-	if (c == 'x')
-		return (get_x_max(fd));
-	else if (c == 'y')
-		return (get_y_max(fd));
-	else
-		return (-1);
-	close(fd);
 }

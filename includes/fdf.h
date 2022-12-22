@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 18:26:03 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/22 16:54:29 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 18:33:04 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		open_file_map(char *file_map);
 int		get_values(char *file_map, char c);
 int		get_x_max(int fd);
 int		get_y_max(int fd);
+void	get_points(char *line, int y, t_fdf **values);
 
 /* checking */
 int		check_error(int fd);
@@ -43,5 +44,8 @@ size_t	arr_len(char **str);
 /* free things */
 t_fdf	**allocate_values(int x_max, int y_max);
 void	free_all(t_fdf **result);
+
+/* tb removed */
+void	display_z(t_fdf *array[], int x_max, int y_max);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:49:17 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/22 16:56:18 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 18:34:00 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,28 @@ t_fdf	**read_map(char *file_map)
 {
 	int		x_max;
 	int		y_max;
-	// t_fdf	**values;
+	int		y;
+	int		fd;
+	t_fdf	**values;
+	char	*line;
 
+	fd = 0;
+	y = 0;
 	x_max = get_values(file_map, 'x');
 	y_max = get_values(file_map, 'y');
 	if (x_max == -1 || y_max == -1)
 		return (NULL);
-	ft_printf("x_max = %i\n", x_max);
-	ft_printf("y_max = %i\n", y_max);
-	// values = allocate_values(x_max, y_max);
-	// while (y_max > 0)
-	// {
-	// 	values = ft_split(get_next_line(fd), ' ');
-	// 	x_max = arr_len(ft_split(get_next_line(fd), ' '));
-	// 	ft_printf("x_max = %i\n", x_max);
-	// 	free(values);
-	// 	ft_printf("y_max = %i\n", y_max);
-	// 	y_max--;
-	// }
-	return (NULL);
+	values = allocate_values(x_max, y_max);
+	fd = open_file_map(file_map);
+	while (y < y_max)
+	{
+		line = get_next_line(fd);
+		get_points(line, y, values);
+		free(line);
+		ft_printf("y = %i\n", y);
+		ft_printf("values[0][0]->z = %i\n", values[3][3].z);
+		y++;
+	}
+	display_z(values, x_max, y_max);
+	return (values);
 }
