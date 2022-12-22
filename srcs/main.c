@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 18:28:59 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/22 11:19:49 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/22 16:54:33 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,65 +41,37 @@
 
 */
 
-
-t_values	*new_node(int x, int y, int z)
-{
-	t_values	*new_elem;
-
-	new_elem = malloc(sizeof(*new_elem));
-	if (!new_elem)
-		return (NULL);
-	new_elem->x = x;
-	new_elem->y = y;
-	new_elem->z = z;
-	new_elem->next = NULL;
-	return (new_elem);
-}
-
-
-t_values	*node_last(t_values *node)
-{
-	t_values	*ptr;
-
-	ptr = node;
-	if (ptr == NULL)
-		return (NULL);
-	while (ptr->next != NULL)
-		ptr = ptr->next;
-	return (ptr);
-}
-
-void	add_node_back(t_values **node, t_values *new)
-{
-	if (node == NULL)
-		return ;
-	if (*node == NULL)
-		*node = new;
-	else
-		node_last(*node)->next = new;
-}
-
 int	main(int argc, char **argv)
 {
-	t_values	*coordinates;
-	char		*line;
-	char			**values;
-	int			index;
-	int			line_number;
-	int			fd;
+	t_fdf	**converted_map;
+	char	*file_map;
 
-	index = 0;
 	if (argc == 2)
 	{
-		fd = open(argv[1], O_RDONLY);
-		return (0);
-		while (line)
-		{
-			line = get_next_line(fd);
-			values = ft_split(line, ' ');
-			while (values[index++])
-				add_node_back(&coordinates, new_node(index, line_number, ft_atoi(values[index])));
-			line_number++;
-		}
+		file_map = argv[1];
+		converted_map = read_map(file_map);
 	}
+}
+
+int	open_file_map(char *file_map)
+{
+	int		fd;
+
+	fd = open(file_map, O_RDONLY);
+	check_error(fd);
+	return (fd);
+}
+
+int	get_values(char *file_map, char c)
+{
+	int	fd;
+
+	fd = open_file_map(file_map);
+	if (c == 'x')
+		return (get_x_max(fd));
+	else if (c == 'y')
+		return (get_y_max(fd));
+	else
+		return (-1);
+	close(fd);
 }
