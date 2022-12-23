@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:49:17 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/22 18:34:00 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/23 11:26:58 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ t_fdf	**read_map(char *file_map)
 		line = get_next_line(fd);
 		get_points(line, y, values);
 		free(line);
-		ft_printf("y = %i\n", y);
-		ft_printf("values[0][0]->z = %i\n", values[3][3].z);
 		y++;
 	}
-	display_z(values, x_max, y_max);
+	// display_z(values, x_max, y_max);
 	return (values);
 }
