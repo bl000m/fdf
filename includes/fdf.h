@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 18:26:03 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/23 12:48:36 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/24 12:13:12 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_fdf
 	int				x;
 	int				y;
 	int				z;
+	int				last;
 	struct s_fdf	*next;
 }	t_fdf;
 
@@ -46,14 +47,14 @@ void	get_points(char *line, int y, t_fdf **values);
 int		check_error(int fd);
 
 /* vision */
-void	get_mlx(void);
+void	draw_map(t_fdf **map);
+void	draw_line(t_fdf a, t_fdf b);
+void	plot_on_screen(t_fdf a, t_fdf b, int move_x, int move_y);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 /* utils */
-void	add_node_back(t_fdf **node, t_fdf *new);
-t_fdf	*node_last(t_fdf *node);
-t_fdf	*new_node(int x, int y, int z);
 size_t	arr_len(char **str);
+float	highest_move(float a, float b);
 
 /* free things */
 t_fdf	**allocate_values(int x_max, int y_max);

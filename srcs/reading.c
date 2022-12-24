@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:49:17 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/23 11:26:58 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/24 12:08:32 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ t_fdf	**read_map(char *file_map)
 		free(line);
 		y++;
 	}
-	// display_z(values, x_max, y_max);
+	display_z(values, x_max, y_max);
 	return (values);
 }

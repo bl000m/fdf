@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:54:17 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/22 16:22:32 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/24 12:09:21 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,38 +22,10 @@ size_t	arr_len(char **str)
 	return (i);
 }
 
-t_fdf	*new_node(int x, int y, int z)
+float	highest_move(float a, float b)
 {
-	t_fdf	*new_elem;
-
-	new_elem = malloc(sizeof(*new_elem));
-	if (!new_elem)
-		return (NULL);
-	new_elem->x = x;
-	new_elem->y = y;
-	new_elem->z = z;
-	new_elem->next = NULL;
-	return (new_elem);
-}
-
-t_fdf	*node_last(t_fdf *node)
-{
-	t_fdf	*ptr;
-
-	ptr = node;
-	if (ptr == NULL)
-		return (NULL);
-	while (ptr->next != NULL)
-		ptr = ptr->next;
-	return (ptr);
-}
-
-void	add_node_back(t_fdf **node, t_fdf *new)
-{
-	if (node == NULL)
-		return ;
-	if (*node == NULL)
-		*node = new;
+	if (a > b)
+		return (a);
 	else
-		node_last(*node)->next = new;
+		return (b);
 }

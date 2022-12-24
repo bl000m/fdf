@@ -6,14 +6,14 @@
 #    By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/03 14:44:01 by mpagani           #+#    #+#              #
-#    Updated: 2022/12/23 13:06:01 by mpagani          ###   ########lyon.fr    #
+#    Updated: 2022/12/24 12:14:33 by mpagani          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= fdf
 # src / obj files
 SRCS 		= main.c checking.c reading.c scanning_map.c utils.c \
-			memory_stuff.c vision.c test_drawing.c drawing.c
+			memory_stuff.c drawing.c vision.c
 OBJS 		= $(SRCS:%.c=$(OBJDIR)/%.o)
 
 # compile

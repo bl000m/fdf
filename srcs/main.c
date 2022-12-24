@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 18:28:59 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/23 13:12:25 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/24 12:10:31 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		// get_mlx();
 		file_map = argv[1];
 		converted_map = read_map(file_map);
 		draw_map(converted_map);

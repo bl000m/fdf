@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:57:40 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/22 18:06:25 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/24 12:08:03 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,6 @@ void	get_points(char *line, int y, t_fdf **values)
 		free(single_points[x]);
 		x++;
 	}
+	// free(single_points);
+	// values[y][--x].last = 1;
 }
