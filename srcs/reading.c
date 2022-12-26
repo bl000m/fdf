@@ -6,42 +6,52 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:49:17 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/24 12:08:32 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/26 18:43:34 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-/*
-* create node
-* call get_x to assign x to node
-* call get_y to assign y to node
-* call get_z to assign z to node
-*/
-t_fdf	**read_map(char *file_map)
+t_fdf	**read_map(char *file_map, t_global *global)
 {
-	int		x_max;
-	int		y_max;
-	int		y;
-	int		fd;
 	t_fdf	**values;
+
+	values = NULL;
+	values = malloc(sizeof(t_fdf *) * (*global->map)->y_max + 1);
+	if (!values)
+		return (NULL);
+	while ((*global->map)->y_max > 0)
+	{
+		values[--(*global->map)->y_max] = malloc(sizeof(t_fdf)
+				* (*global->map)->x_max + 1);
+		if (!values[(*global->map)->y_max])
+		{
+			free_all(values);
+			return (NULL);
+		}
+	}
+	create_list(file_map, global, values);
+	return (values);
+}
+
+void	create_list(char *file_map, t_global *global, t_fdf **values)
+{
 	char	*line;
+	int		fd;
+	int		y;
 
 	fd = 0;
 	y = 0;
-	x_max = get_values(file_map, 'x');
-	y_max = get_values(file_map, 'y');
-	if (x_max == -1 || y_max == -1)
-		return (NULL);
-	values = allocate_values(x_max, y_max);
+	(*global->map)->y_max = get_values(file_map, 'y');
 	fd = open_file_map(file_map);
-	while (y < y_max)
+	while (y < (*global->map)->y_max)
 	{
 		line = get_next_line(fd);
 		get_points(line, y, values);
 		free(line);
 		y++;
 	}
-	display_z(values, x_max, y_max);
-	return (values);
+	values[y] = NULL;
+	close(fd);
+	// display_z(values, (*global->map)->x_max, (*global->map)->y_max);
 }

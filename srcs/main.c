@@ -6,38 +6,11 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 18:28:59 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/24 12:10:31 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/26 18:42:31 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-/*
-	* = incertitudes
-	What are we supposed to do ?
-	1. open and read the map line by line => gnl, fd = map.fdf
-	RENDERING
-	2. convert each value of the map .fdf in coordinates (x, y, z)
-	=> x(axis) = index of the nb in line (scanning horizontally)
-	=> y(ordinate) = n. of line where the nb is (scanning vertically)
-	=> z(altitude) = value of nb
-	* y = 0 is the first  line
-	split + atoi sur chaque charactere pour obtenir un array de struct (contenant x y z etc..)
-	DISPLAY IMAGES
-	3. load the MiniLibX via the Makefile to open a GUI (?)
-	practice (https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html)
-	4. create the wireframe model representation. How ?
-		a. link points in segments => Bresenham's line ?
-		b. sin and cos to make isometric projection
-		c * ...
-	5. code functions to execute EVENT:
-	- ESC to close the window
-	- click on the cross quit the program => what means ?
-	BONUS PART ? is it worth it ?
-	- add extra projection (Parallel or conic)
-	- zoom in and out
-	- rotate model
-*/
 
 void	display_z(t_fdf *array[], int x_max, int y_max)
 {
@@ -62,15 +35,33 @@ void	display_z(t_fdf *array[], int x_max, int y_max)
 
 int	main(int argc, char **argv)
 {
-	t_fdf	**converted_map;
-	char	*file_map;
+	t_global	global;
 
+	global.map = malloc(sizeof(*global.map));
+	if (!global.map)
+		free_exit(&global);
+	(void) *argv;
 	if (argc == 2)
 	{
-		file_map = argv[1];
-		converted_map = read_map(file_map);
-		draw_map(converted_map);
+		get_size(argv[1], &global);
+		global.map = read_map(argv[1], &global);
+		// init_mlx(&global);
+		// draw_map(global.map, &global);
+		// mlx_loop(global.mlx);
 	}
 	else
 		ft_printf("please specify the map: ./fdf ./maps/map_name.fdf");
+}
+
+void	init_mlx(t_global *global)
+{
+	ft_printf("in init_mlx\n");
+	ft_printf("mlx_init return = %s\n", mlx_init());
+	global->mlx = mlx_init();
+	if (!global->mlx)
+		ft_printf("error in mlx init return\n");
+	global->mlx_win = mlx_new_window(global->mlx, WIN_H, WIN_W, "fdf");
+	global->data.img = mlx_new_image(global->mlx, WIN_H, WIN_W);
+	global->data.addr = mlx_get_data_addr(global->data.img, &global->data
+			.bits_per_pixel, &global->data.line_length, &global->data.endian);
 }

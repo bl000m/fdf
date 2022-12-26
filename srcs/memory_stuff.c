@@ -6,31 +6,28 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 15:47:12 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/22 18:07:07 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/26 18:41:13 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-t_fdf	**allocate_values(int x_max, int y_max)
-{
-	t_fdf	**values;
-
-	values = NULL;
-	values = malloc(sizeof(t_fdf *) * y_max + 1);
-	if (!*values)
-		return (NULL);
-	while (y_max > 0)
-	{
-		values[--y_max] = malloc(sizeof(t_fdf) * x_max + 1);
-		if (!values[y_max])
-		{
-			free_all(values);
-			return (NULL);
-		}
-	}
-	return (values);
-}
+// void	allocate_values(t_fdf **values, t_global *global)
+// {
+// 	values = malloc(sizeof(t_fdf *) * (*global->map)->y_max + 1);
+// 	if (!values)
+// 		return ;
+// 	while ((*global->map)->y_max > 0)
+// 	{
+// 		values[--(*global->map)->y_max] = malloc(sizeof(t_fdf)
+// 				* (*global->map)->x_max + 1);
+// 		if (!values[(*global->map)->y_max])
+// 		{
+// 			free_all(values);
+// 			return ;
+// 		}
+// 	}
+// }
 
 void	free_all(t_fdf **result)
 {
@@ -41,4 +38,21 @@ void	free_all(t_fdf **result)
 		free(result[i++]);
 	free(result);
 	return ;
+}
+
+void	free_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+		free(array[i++]);
+	free(array);
+	return ;
+}
+
+void	free_exit(t_global *global)
+{
+	if (global->map)
+		free(global->map);
 }

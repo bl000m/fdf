@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:57:40 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/24 12:08:03 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/26 18:46:32 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	get_x_max(int fd)
 
 	values = ft_split(get_next_line(fd), ' ');
 	x_max = arr_len(values);
-	free(values);
+	free_array(values);
 	return (x_max);
 }
 
@@ -69,9 +69,23 @@ void	get_points(char *line, int y, t_fdf **values)
 		values[y][x].x = x;
 		values[y][x].y = y;
 		values[y][x].z = ft_atoi(single_points[x]);
+		values[y][x].last = 0;
 		free(single_points[x]);
 		x++;
 	}
-	// free(single_points);
-	// values[y][--x].last = 1;
+	free(single_points);
+	values[y][--x].last = 1;
+}
+
+void	get_size(char *file_map, t_global *global)
+{
+	int		x_max;
+	int		y_max;
+
+	x_max = get_values(file_map, 'x');
+	y_max = get_values(file_map, 'y');
+	if (x_max == -1 || y_max == -1)
+		return ;
+	(*global->map)->x_max = x_max;
+	(*global->map)->y_max = y_max;
 }
