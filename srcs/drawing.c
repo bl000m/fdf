@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:05:37 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/27 15:34:25 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/27 15:51:36 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ void	draw_line(t_fdf a, t_fdf b, t_global *global)
 	float	delta_y;
 	float	max;
 
+	a.x *= 20;
+	b.x *= 20;
+	a.y *= 20;
+	b.y *= 20;
 	delta_x = b.x - a.x;
 	delta_y = b.y - a.y;
 	max = highest_delta(is_neg(delta_x), is_neg(delta_y));

@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 18:26:03 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/27 15:32:50 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/27 16:26:03 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 # define WIN_H 1080
 # define WIN_W 1920
+
+
 
 typedef struct s_fdf
 {
@@ -46,6 +48,11 @@ typedef struct s_global
 	int				x_max;
 	int				y_max;
 }	t_global;
+
+typedef struct s_camera
+{
+	float	zoom;
+}	t_camera;
 
 /* reading _ scanning map */
 t_fdf	**read_map(char *file_map, t_global *global);
