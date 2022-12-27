@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:57:40 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/26 18:46:32 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/27 15:28:44 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,29 @@ int	get_values(char *file_map, char c)
 int	get_x_max(int fd)
 {
 	int		x_max;
-	char	**values;
+	char	*line;
 
-	values = ft_split(get_next_line(fd), ' ');
-	x_max = arr_len(values);
-	free_array(values);
+	line = get_next_line(fd);
+	x_max = ft_words(line, ' ');
+	free(line);
 	return (x_max);
 }
 
 // tbc if to be free
 int	get_y_max(int fd)
 {
-	int	y_max;
+	int		y_max;
+	char	*line;
 
 	y_max = 0;
-	while (get_next_line(fd))
+	while (1)
+	{
+		line = get_next_line(fd);
+		free(line);
+		if (!line)
+			break ;
 		y_max++;
+	}
 	return (y_max);
 }
 
@@ -86,6 +93,7 @@ void	get_size(char *file_map, t_global *global)
 	y_max = get_values(file_map, 'y');
 	if (x_max == -1 || y_max == -1)
 		return ;
-	(*global->map)->x_max = x_max;
-	(*global->map)->y_max = y_max;
+	global->x_max = x_max;
+	global->y_max = y_max;
+	ft_printf("test %d - %d\n", x_max, y_max);
 }
