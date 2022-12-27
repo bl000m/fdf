@@ -6,16 +6,16 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:37:26 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/10 12:14:01 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/27 14:04:00 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "libft.h"
 
-int	check_eol(t_list *record)
+int	check_eol(t_gnl *record)
 {
 	int		i;
-	t_list	*ptr;
+	t_gnl	*ptr;
 
 	if (!record)
 	{
@@ -32,10 +32,10 @@ int	check_eol(t_list *record)
 	return (0);
 }
 
-void	ft_add_pattern(t_list **lst, char *buffer, int characters)
+void	ft_add_pattern(t_gnl **lst, char *buffer, int characters)
 {
-	t_list	*ptr;
-	t_list	*new;
+	t_gnl	*ptr;
+	t_gnl	*new;
 	int		i;
 
 	i = 0;
@@ -61,7 +61,7 @@ void	ft_add_pattern(t_list **lst, char *buffer, int characters)
 	ptr->next = new;
 }
 
-int	ft_line_size(t_list *record)
+int	ft_line_size(t_gnl *record)
 {
 	int	len;
 	int	i;
@@ -85,9 +85,9 @@ int	ft_line_size(t_list *record)
 	return (len);
 }
 
-t_list	*ft_lstlast(t_list *lst)
+t_gnl	*ft_lstlast(t_gnl *lst)
 {
-	t_list	*ptr;
+	t_gnl	*ptr;
 
 	ptr = lst;
 	if (ptr == NULL)
@@ -95,14 +95,4 @@ t_list	*ft_lstlast(t_list *lst)
 	while (ptr && ptr->next)
 		ptr = ptr->next;
 	return (ptr);
-}
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
 }

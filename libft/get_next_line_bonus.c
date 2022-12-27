@@ -6,15 +6,15 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:37:22 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/13 17:41:41 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/27 14:03:52 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "libft.h"
 
 char	*get_next_line(int fd)
 {
-	static t_list	*record[OPEN_MAX];
+	static t_gnl	*record[OPEN_MAX];
 	char			*line;
 
 	line = NULL;
@@ -39,7 +39,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-void	read_stock(t_list **record, int fd)
+void	read_stock(t_gnl **record, int fd)
 {
 	char	buffer[BUFFER_SIZE + 1];
 	int		characters;
@@ -58,7 +58,7 @@ void	read_stock(t_list **record, int fd)
 	}
 }
 
-void	compose_line(char **line, t_list *record)
+void	compose_line(char **line, t_gnl *record)
 {
 	int		i;
 	int		j;
@@ -84,10 +84,10 @@ void	compose_line(char **line, t_list *record)
 	(*line)[j] = '\0';
 }
 
-void	clean_record(t_list **record)
+void	clean_record(t_gnl **record)
 {
-	t_list	*last;
-	t_list	*temp;
+	t_gnl	*last;
+	t_gnl	*temp;
 	int		i;
 	int		t;
 
@@ -112,10 +112,10 @@ void	clean_record(t_list **record)
 	*record = temp;
 }
 
-void	ft_free_list(t_list *record)
+void	ft_free_list(t_gnl *record)
 {
-	t_list	*current;
-	t_list	*following;
+	t_gnl	*current;
+	t_gnl	*following;
 
 	current = record;
 	while (current)

@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:37:31 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/10 12:17:01 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/27 13:59:16 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 #  define BUFFER_SIZE 10
 # endif
 
-typedef struct s_list
+typedef struct s_gnl
 {
 	char			*content;
 	struct s_list	*next;
-}	t_list;
+}	t_gnl;
 
 char	*get_next_line(int fd);
 int		check_eol(t_list *stash);
