@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:37:26 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/27 14:04:00 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/27 16:28:22 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_eol(t_gnl *record)
 		return (0);
 	}
 	i = 0;
-	ptr = ft_lstlast(record);
+	ptr = ft_gnllast(record);
 	while (ptr->content[i] != '\0')
 	{
 		if (ptr->content[i] == '\n')
@@ -57,7 +57,7 @@ void	ft_add_pattern(t_gnl **lst, char *buffer, int characters)
 		*lst = new;
 		return ;
 	}
-	ptr = ft_lstlast(*lst);
+	ptr = ft_gnllast(*lst);
 	ptr->next = new;
 }
 
@@ -85,14 +85,14 @@ int	ft_line_size(t_gnl *record)
 	return (len);
 }
 
-t_gnl	*ft_lstlast(t_gnl *lst)
+t_gnl	*ft_gnllast(t_gnl *lst)
 {
 	t_gnl	*ptr;
 
 	ptr = lst;
 	if (ptr == NULL)
 		return (NULL);
-	while (ptr && ptr->next)
+	while (ptr->next != NULL)
 		ptr = ptr->next;
 	return (ptr);
 }

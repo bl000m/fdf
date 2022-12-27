@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 13:37:22 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/27 14:03:52 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/27 16:24:42 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	clean_record(t_gnl **record)
 	if (!temp || (!*record))
 		return ;
 	temp->next = NULL;
-	last = ft_lstlast(*record);
+	last = ft_gnllast(*record);
 	while (last->content[i] && last->content[i] != '\n')
 		i++;
 	if (last->content[i] && last->content[i] == '\n')

@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 14:37:46 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/27 14:03:42 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/27 16:24:10 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_list
 typedef struct s_gnl
 {
 	char			*content;
-	struct s_list	*next;
+	struct s_gnl	*next;
 }	t_gnl;
 
 void	ft_bzero(void *s, size_t n);
@@ -90,10 +90,14 @@ int		ft_output_u(va_list args, int size);
 int		ft_output_perc(int size);
 void	ft_putnbr(int nb);
 int		ft_putnbr_base(unsigned long long nb, unsigned int base, char *digits);
-int		check_eol(t_list *stash);
-void	ft_add_pattern(t_list **lst, char *buffer, int characters);
-int		ft_line_size(t_list *record);
+int		check_eol(t_gnl *stash);
+void	ft_add_pattern(t_gnl **lst, char *buffer, int characters);
+int		ft_line_size(t_gnl *record);
 char	*get_next_line(int fd);
-t_list	*ft_lstlast(t_list *lst);
+t_gnl	*ft_gnllast(t_gnl *lst);
+void	ft_free_list(t_gnl *record);
+void	clean_record(t_gnl **record);
+void	compose_line(char **line, t_gnl *record);
+void	read_stock(t_gnl **record, int fd);
 
 #endif
