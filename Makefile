@@ -6,19 +6,20 @@
 #    By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/03 14:44:01 by mpagani           #+#    #+#              #
-#    Updated: 2022/12/24 12:14:33 by mpagani          ###   ########lyon.fr    #
+#    Updated: 2022/12/28 17:06:47 by mpagani          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= fdf
 # src / obj files
 SRCS 		= main.c checking.c reading.c scanning_map.c utils.c \
-			memory_stuff.c drawing.c vision.c
+			memory_stuff.c drawing.c hooks.c camera.c menu.c \
+			changing.c
 OBJS 		= $(SRCS:%.c=$(OBJDIR)/%.o)
 
 # compile
 CC 			= cc
-CFLAGS 		= -Wall -Werror -Wextra -g3 -ggdb3
+CFLAGS 		= -Wall -Werror -Wextra -ggdb3 -g3
 
 # directories
 SRCS_DIR	= ./srcs

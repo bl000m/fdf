@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:54:17 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/27 15:03:09 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/28 17:08:12 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,22 @@ size_t	arr_len(char **str)
 	return (i);
 }
 
-float	highest_delta(float x, float y)
+float	highest(float x, float y)
 {
 	if (x > y)
 		return (x);
 	else
 		return (y);
+}
+
+int	lowest(int a, int b)
+{
+	if (!a || !b)
+		return (0);
+	if (a < b)
+		return (a);
+	else
+		return (b);
 }
 
 float	is_neg(float p)

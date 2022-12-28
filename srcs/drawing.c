@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:05:37 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/27 15:51:36 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/28 17:41:37 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	draw_map(t_fdf **map, t_global *global)
 	}
 	mlx_put_image_to_window(global->mlx,
 		global->mlx_win, global->data.img, 0, 0);
+	// show_menu(global);
 }
 
 // error = 2*(delta.y - delta.x)
@@ -43,19 +44,20 @@ void	draw_line(t_fdf a, t_fdf b, t_global *global)
 	float	delta_x;
 	float	delta_y;
 	float	max;
+	int		color;
 
-	a.x *= 20;
-	b.x *= 20;
-	a.y *= 20;
-	b.y *= 20;
+	// isometric_projection(global, &a);
+	// isometric_projection(global, &b);
+	// set_vision(global, &a, &b);
+	set_camera(&a, &b, global, &color);
 	delta_x = b.x - a.x;
 	delta_y = b.y - a.y;
-	max = highest_delta(is_neg(delta_x), is_neg(delta_y));
+	max = highest(is_neg(delta_x), is_neg(delta_y));
 	delta_x = delta_x / max;
 	delta_y = delta_y / max;
 	while ((int)(a.x - b.x) || (int)(a.y - b.y))
 	{
-		my_mlx_pixel_put(&global->data, a.x, a.y, 0x00FF0000);
+		my_mlx_pixel_put(&global->data, a.x, a.y, color);
 		a.x += delta_x;
 		a.y += delta_y;
 		if (a.x > WIN_W || a.y > WIN_H | a.x < 0 || a.y < 0)

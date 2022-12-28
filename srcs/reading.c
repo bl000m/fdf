@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:49:17 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/27 15:29:43 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/28 10:25:36 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,4 @@ void	create_list(char *file_map, t_global *global, t_fdf **values)
 	}
 	values[y] = NULL;
 	close(fd);
-	// display_z(values, (*global->map)->x_max, global->y_max);
 }
