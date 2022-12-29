@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:05:37 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/28 17:41:37 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/29 14:48:24 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	draw_map(t_fdf **map, t_global *global)
 	}
 	mlx_put_image_to_window(global->mlx,
 		global->mlx_win, global->data.img, 0, 0);
-	// show_menu(global);
+	show_menu(global);
 }
 
 // error = 2*(delta.y - delta.x)
@@ -48,13 +48,13 @@ void	draw_line(t_fdf a, t_fdf b, t_global *global)
 
 	// isometric_projection(global, &a);
 	// isometric_projection(global, &b);
-	// set_vision(global, &a, &b);
+	set_vision(global, &a, &b);
 	set_camera(&a, &b, global, &color);
 	delta_x = b.x - a.x;
 	delta_y = b.y - a.y;
 	max = highest(is_neg(delta_x), is_neg(delta_y));
-	delta_x = delta_x / max;
-	delta_y = delta_y / max;
+	delta_x /= max;
+	delta_y /= max;
 	while ((int)(a.x - b.x) || (int)(a.y - b.y))
 	{
 		my_mlx_pixel_put(&global->data, a.x, a.y, color);

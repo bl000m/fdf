@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 18:26:03 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/28 17:06:02 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/29 15:25:52 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 
 typedef struct s_fdf
 {
-	int				x;
-	int				y;
+	float			x;
+	float			y;
 	int				z;
 	int				last;
 }	t_fdf;
@@ -68,7 +68,9 @@ enum e_keycodes
 	MINUS = 78,
 	SPACE = 49,
 	KEY_I = 34,
-	KEY_Z = 90
+	KEY_Q = 12,
+	KEY_E = 14,
+	KEY_R = 15
 };
 
 /* reading _ scanning map */
@@ -95,7 +97,9 @@ void		draw_line(t_fdf a, t_fdf b, t_global *global);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		zoom(int key, t_global *global);
 void		isometric_projection(t_global *global, t_fdf *point);
-void		rotate_z(t_fdf *a, t_fdf *b, float angle);
+// void		rotate_z(t_fdf *a, t_fdf *b, float angle);
+void		rotate(int key, t_global *global);
+
 /* hooks */
 void		init_hooks(t_global *global);
 int			keybord_hooks(int keycode, t_global *global);
