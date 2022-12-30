@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 18:28:59 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/29 12:34:08 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/30 17:57:26 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int argc, char **argv)
 	if (!global->map)
 		free_exit(global);
 	global->map = read_map(argv[1], global);
-	set_default(global);
 	draw_map(global->map, global);
 	init_hooks(global);
 	mlx_loop(global->mlx);

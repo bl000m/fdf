@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:05:37 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/29 14:48:24 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/30 12:36:38 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ void	draw_line(t_fdf a, t_fdf b, t_global *global)
 	float	max;
 	int		color;
 
-	// isometric_projection(global, &a);
-	// isometric_projection(global, &b);
 	set_vision(global, &a, &b);
 	set_camera(&a, &b, global, &color);
 	delta_x = b.x - a.x;
@@ -57,11 +55,11 @@ void	draw_line(t_fdf a, t_fdf b, t_global *global)
 	delta_y /= max;
 	while ((int)(a.x - b.x) || (int)(a.y - b.y))
 	{
+		if (a.x > WIN_W || a.y > WIN_H || a.x < 0 || a.y < 0)
+			break ;
 		my_mlx_pixel_put(&global->data, a.x, a.y, color);
 		a.x += delta_x;
 		a.y += delta_y;
-		if (a.x > WIN_W || a.y > WIN_H | a.x < 0 || a.y < 0)
-			break ;
 	}
 }
 

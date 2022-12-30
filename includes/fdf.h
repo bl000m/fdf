@@ -6,7 +6,7 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 18:26:03 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/29 15:25:52 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2022/12/30 17:55:10 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@
 
 # define WIN_H 1080
 # define WIN_W 1920
+# define MENU_C 0xF7FD04
+# define ALTITUDE_COLOR 0x9900F0
+# define FLAT_COLOR 0xFFFF00
+# define CLIMB_COLOR 0xF900BF
 
 typedef struct s_fdf
 {
 	float			x;
 	float			y;
-	int				z;
+	float			z;
 	int				last;
 }	t_fdf;
 
@@ -49,6 +53,7 @@ typedef struct s_global
 	float			zoom;
 	float			angle;
 	int				ISO;
+	int				menu_visible;
 	int				shift_x;
 	int				shift_y;
 }	t_global;
@@ -67,10 +72,14 @@ enum e_keycodes
 	PLUS = 69,
 	MINUS = 78,
 	SPACE = 49,
-	KEY_I = 34,
-	KEY_Q = 12,
+	KEY_A = 0,
 	KEY_E = 14,
-	KEY_R = 15
+	KEY_R = 15,
+	KEY_D = 2,
+	UP = 126,
+	DOWN = 125,
+	RIGHT = 124,
+	LEFT = 123
 };
 
 /* reading _ scanning map */
@@ -97,8 +106,8 @@ void		draw_line(t_fdf a, t_fdf b, t_global *global);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		zoom(int key, t_global *global);
 void		isometric_projection(t_global *global, t_fdf *point);
-// void		rotate_z(t_fdf *a, t_fdf *b, float angle);
 void		rotate(int key, t_global *global);
+void		shift(int key, t_global *global);
 
 /* hooks */
 void		init_hooks(t_global *global);
