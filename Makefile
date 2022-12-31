@@ -29,7 +29,7 @@ OBJDIR 		= ./obj
 # library ft_
 LIBFT_DIR	= ./libft
 LIBFT		= $(LIBFT_DIR)/libft.a
-LIBFT_INC	= -I ./libft
+LIBFT_INC	= -I./libft
 LIBFT_LNK	= -L ./libft -l ft
 
 # library minilibx
