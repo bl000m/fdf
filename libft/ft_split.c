@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 16:52:20 by mpagani           #+#    #+#             */
-/*   Updated: 2022/11/18 08:56:43 by mpagani          ###   ########lyon.fr   */
+/*   Created: 2022/11/11 19:37:03 by zrebhi            #+#    #+#             */
+/*   Updated: 2023/01/02 13:53:15 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,74 +14,95 @@
 
 static int	ft_words(char const *s, char c)
 {
-	int	words;
-	int	on_off;
 	int	i;
+	int	words;
 
-	words = 0;
-	on_off = 0;
 	i = 0;
+	words = 0;
 	while (s[i])
 	{
-		if (s[i] != c && on_off == 0)
+		while (s[i] && s[i] == c)
+			i++;
+		if (s[i] != c && s[i] != 0)
 		{
-			on_off = 1;
 			words++;
+			i++;
 		}
-		else if (s[i] == c)
-			on_off = 0;
-		i++;
+		while (s[i] && s[i] != c)
+			i++;
 	}
 	return (words);
 }
 
-static void	ft_free_all(char **result)
+static char	*ft_dupstr(char const *s, int i, int j)
+{
+	char	*dup;
+	int		x;
+
+	dup = malloc(sizeof(char) * (j - i + 1));
+	if (!dup)
+		return (0);
+	x = 0;
+	while (s[i] && i < j)
+	{
+		dup[x] = s[i];
+		x++;
+		i++;
+	}
+	dup[x] = 0;
+	return (dup);
+}
+
+static char	**ft_free(char **strs)
 {
 	int	i;
 
 	i = 0;
-	while (result[i])
-		free(result[i++]);
-	free(result);
-	return ;
-}
-
-static void	ft_split2(char **result, char const *s, char c)
-{
-	size_t	i;
-	size_t	j;
-	int		index;
-
-	i = 0;
-	j = 0;
-	index = -1;
-	while (i <= ft_strlen(s))
+	while (strs[i])
 	{
-		if (index < 0 && s[i] != c)
-			index = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
-		{
-			result[j] = malloc(sizeof(char *) * ((i - index) + 1));
-			if (!result[j])
-				return (ft_free_all(result));
-			ft_strlcpy(result[j], (char *)&s[index], (i - index) + 1);
-			index = -1;
-			j++;
-		}
+		free(strs[i]);
 		i++;
 	}
-	result[j] = 0;
+	free(strs);
+	return (0);
+}
+
+static	char	**ft_lines(char const *s, char c, char **strs, int x)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (s[i])
+	{
+		while (s[i] && s[i] == c)
+			i++;
+		j = i;
+		while (s[j] && s[j] != c)
+			j++;
+		if (s[j] == c || (!s[j] && s[j - 1] != c))
+		{
+			strs[x] = ft_dupstr(s, i, j);
+			if (strs[x] == 0)
+				return (ft_free(strs));
+			x++;
+			i = j;
+		}
+	}
+	return (strs);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**result;
+	char	**strs;
 
 	if (!s)
+		return (0);
+	strs = malloc(sizeof(char *) * (ft_words(s, c) + 1));
+	if (!strs)
 		return (NULL);
-	result = malloc(sizeof(*result) * (ft_words(s, c) + 1));
-	if (!result)
-		return (NULL);
-	ft_split2(result, s, c);
-	return (result);
+	strs = ft_lines(s, c, strs, 0);
+	if (strs)
+		strs[ft_words(s, c)] = 0;
+	return (strs);
 }
