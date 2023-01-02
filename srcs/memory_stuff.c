@@ -6,28 +6,11 @@
 /*   By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 15:47:12 by mpagani           #+#    #+#             */
-/*   Updated: 2022/12/29 16:49:53 by mpagani          ###   ########lyon.fr   */
+/*   Updated: 2023/01/02 12:32:38 by mpagani          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-// void	allocate_values(t_fdf **values, t_global *global)
-// {
-// 	values = malloc(sizeof(t_fdf *) * (*global->map)->y_max + 1);
-// 	if (!values)
-// 		return ;
-// 	while ((*global->map)->y_max > 0)
-// 	{
-// 		values[--(*global->map)->y_max] = malloc(sizeof(t_fdf)
-// 				* (*global->map)->x_max + 1);
-// 		if (!values[(*global->map)->y_max])
-// 		{
-// 			free_all(values);
-// 			return ;
-// 		}
-// 	}
-// }
 
 void	free_all(t_fdf **result)
 {
@@ -40,19 +23,31 @@ void	free_all(t_fdf **result)
 	return ;
 }
 
-void	free_array(char **array)
+int	check_error(int argc, char *argv)
 {
-	int	i;
+	int		fd;
 
-	i = 0;
-	while (array[i])
-		free(array[i++]);
-	free(array);
-	return ;
+	fd = open(argv, O_RDONLY);
+	if (argc != 2)
+	{
+		if (argc < 2)
+			ft_printf("Hey, please specify which map to open ! > ./maps/...");
+		if (argc > 2)
+			ft_printf("Hey, you wrote too many arguments !");
+		exit(1);
+	}
+	else if (fd == -1 || read(fd, 0, 0) < 0)
+	{
+		ft_printf("Hey, this is not a valid map. I can't open it !");
+		exit (1);
+	}
+	close(fd);
+	return (1);
 }
 
-void	free_exit(t_global *global)
+int	check_fd_error(int fd)
 {
-	if (global->map)
-		free(global->map);
+	if (fd == -1 || read(fd, 0, 0) < 0)
+		exit (1);
+	return (1);
 }

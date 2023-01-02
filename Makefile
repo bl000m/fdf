@@ -6,15 +6,16 @@
 #    By: mpagani <mpagani@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/03 14:44:01 by mpagani           #+#    #+#              #
-#    Updated: 2022/12/28 17:06:47 by mpagani          ###   ########lyon.fr    #
+#    Updated: 2023/01/02 13:26:26 by mpagani          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= fdf
 # src / obj files
-SRCS 		= main.c checking.c reading.c scanning_map.c utils.c \
-			memory_stuff.c drawing.c hooks.c camera.c menu.c \
-			changing.c
+SRCS 		= main.c map_reading.c map_scanning.c map_utils.c \
+			vision_drawing.c vision_settings.c \
+			vision_hooks.c vision_features.c \
+			memory_stuff.c
 OBJS 		= $(SRCS:%.c=$(OBJDIR)/%.o)
 
 # compile
@@ -29,7 +30,7 @@ OBJDIR 		= ./obj
 # library ft_
 LIBFT_DIR	= ./libft
 LIBFT		= $(LIBFT_DIR)/libft.a
-LIBFT_INC	= -I./libft
+LIBFT_INC	= -I ./libft
 LIBFT_LNK	= -L ./libft -l ft
 
 # library minilibx
